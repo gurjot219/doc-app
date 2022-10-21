@@ -1,0 +1,47 @@
+<div class="card">
+  <h5 class="card-header">Doctors</h5>
+  <div class="card-body">
+
+    <%= form_with(model: @doctor) do |form| %>
+      <div class="row g-3">
+
+        <div class="col-md-6">
+          <%= form.label :first_name, class: "form-label" %>
+          <%= form.text_field :first_name, class: "form-control" %>
+        </div>
+        <div class="col-md-6">
+          <%= form.label :lastt_name, class: "form-label" %>
+          <%= form.text_field :last_name, class: "form-control" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :speciality_id, class: "form-label" %>
+          <div class="form-select">
+            <%= form.select :speciality_id, @specialities.map{|s| [s.name, s.id]}, id: "doctor_speciality_id"  %>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :image, class: "form-label" %>
+          <%= form.file_field :image, class: "form-control" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :email, class: "form-label" %>
+          <%= form.email_field :email, class: "form-control" %>
+        </div>
+        <div class="col-md-6">
+          <%= form.label :password, class: "form-label" %>
+          <%= form.email_field :password, class: "form-control" %>
+        </div>
+
+        <div class="col-12 tab-end">
+          <button type="submit" class="btn btn-primary">Back</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+
+    <%end%>
+
+  </div>
+</div>
