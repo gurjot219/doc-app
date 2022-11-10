@@ -4,14 +4,17 @@ class PatientsController < ApplicationController
 
   def index
     @patients = Patient.all
+    authorize @patients
   end
 
   def new
     @patient = Patient.new
+    authorize @patient
   end
 
   def create
     @patient = Patient.new(patient_params)
+    authorize @patient
     respond_to do |format|
       if @patient.save
         format.html { redirect_to patients_url, notice: "Patient was successfully Created." }
@@ -22,14 +25,17 @@ class PatientsController < ApplicationController
   end
 
   def show
+    authorize @patient
     start_date = params.fetch(:start_date, Date.today).to_date
     @appointments = Appointment.where(start_time: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
   end
 
   def edit
+    authorize @patient
   end
 
   def update
+    authorize @patient
     respond_to do |format|
       if @patient.update(patient_params)
         format.html { redirect_to patients_url, notice: "Patient was successfully updated." }
@@ -40,8 +46,8 @@ class PatientsController < ApplicationController
   end
 
   def destroy
+    authorize @patient
     @patient.destroy
-
     respond_to do |format|
       format.html { redirect_to specialities_url, notice: "Patient was successfully destroyed." }
       format.json { head :no_content }
