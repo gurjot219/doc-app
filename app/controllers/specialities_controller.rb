@@ -15,10 +15,12 @@ class SpecialitiesController < ApplicationController
   # GET /specialities/new
   def new
     @speciality = Speciality.new
+    authorize @speciality
   end
 
   # GET /specialities/1/edit
   def edit
+    authorize @speciality
   end
 
   # POST /specialities or /specialities.json
@@ -28,8 +30,10 @@ class SpecialitiesController < ApplicationController
 
     if @speciality.nil?
       @speciality = Speciality.new(speciality_params)
+      authorize @speciality
       flag = true if @speciality.save
     else
+      authorize @speciality, :update?
       flag = true if @speciality.update(speciality_params)
     end
 
@@ -44,6 +48,7 @@ class SpecialitiesController < ApplicationController
 
   # PATCH/PUT /specialities/1 or /specialities/1.json
   def update
+    authorize @speciality
     respond_to do |format|
       if @speciality.update(speciality_params)
         format.html { redirect_to speciality_url(@speciality), notice: "Speciality was successfully updated." }
@@ -57,6 +62,7 @@ class SpecialitiesController < ApplicationController
 
   # DELETE /specialities/1 or /specialities/1.json
   def destroy
+    authorize @speciality
     @speciality.destroy
 
     respond_to do |format|
