@@ -1,0 +1,116 @@
+<div class="page-content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-8 d-flex justify-content-start">
+              <a class="btn btn-dark" href="<%= new_patient_path %>" >
+                <i class="fa-solid fa-plus"></i> Add
+              </a>
+            </div>
+
+            <div class="col-md-4 d-flex justify-content-end">
+              <button type="button" class="btn btn-light list-view-btn">
+                <i class="fa-solid fa-list" style ="color: black; height: 22px"></i>
+              </button>
+              <button type="button" class="btn btn-light grid-view-btn">
+                <i class="fa-solid fa-border-all " style ="color: #black; height: 22px;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body list-view">
+          <table class="table table-borderless table-sm table-hover">
+            <thead>
+              <tr class="table-columns">
+                <th scope="col">SID</th>
+                <th scope="col" >Patient</th>
+                <th scope="col" >Email</th>
+                <th scope="col" >Phone</th>
+                <th scope="col" >Address</th>
+                <th scope="col" class="tab-end">EDIT | DELETE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @patients.each do |patient| %>
+                <tr class = "table-rows">
+                  <th scope="row">#<%= patient.id%></th>
+                  <td >
+                    <div class="table-avatar">
+                      <div class="spl-img">
+                        <%= image_tag(patient.image, style: 'width:100%') %>
+                      </div>
+                      <div >
+                        <%name = patient.first_name + " " + patient.last_name%>
+                        <%= name %>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <%= patient.email %>
+                  </td>
+                  <td>
+                    <%= patient.phone %>
+                  </td>
+                  <td>
+                    <%= patient.address %>
+                  </td>
+                  <td class="tab-end">
+                    <a class="text-black actions" href=" <%= edit_patient_path(patient) %>" >
+                      <i class="fa-solid fa-file-pen"></i> Edit
+                    </a>
+                    |
+                    <a class="text-danger actions"  data-turbo-method="delete" data-turbo-confirm="Are you sure?" href="<%= patient_path(patient)%>" >
+                      <i class="fa-solid fa-trash"></i> Delete
+                    </a>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="card-body grid-view">
+          <div class="row">
+            <% @patients.each do |patient| %>
+
+              <div class="col-md-3" style= "margin-bottom: 20px">
+                <div class="card" style="width: fit-content;">
+                  <div class="" style="text-align: center">
+                    <%= image_tag(patient.image, class: "card-image") %>
+
+                  </div>
+                  <hr style = "margin-top: 0px">
+                  <div class="card-body">
+                    <%name = patient.first_name + " " + patient.last_name%>
+
+                    <h5 class="card-title"><%= name%></h5>
+                    <p class="text-muted mb-0"><i class="fa-solid fa-stethoscope"></i> <%=patient.phone%></p>
+                    <p class="text-muted mb-0"><i class="fa-solid fa-mobile-retro"></i> <%=patient.email%></p>
+                  </div>
+                </div>
+              </div>
+            <%end%>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(".grid-view").hide()
+  $(".grid-view-btn").click(function() {
+    $(".list-view").hide()
+    $(".grid-view").show()
+  })
+  $(".list-view-btn").click(function() {
+    $(".grid-view").hide()
+    $(".list-view").show()
+  })
+</script>

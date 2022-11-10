@@ -1,0 +1,112 @@
+<div class="page-content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-8 d-flex justify-content-start">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#addAppointment" class="btn btn-dark"><i class="fa-solid fa-plus"></i>  Appointment
+              </a>
+            </div>
+
+            <div class="col-md-4 d-flex justify-content-end">
+              Availability
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-md-4 doc-profile">
+              <div class="card">
+                <div class="" style="text-align: center;   background-color: whitesmoke;">
+                  <%= image_tag(@doctor.image, class: "show-page-card-image") %>
+
+                </div>
+                <hr style = "margin-top: 0px">
+                <div class="card-body">
+                  <%name = @doctor.first_name + " " + @doctor.last_name%>
+
+                  <h5 class="card-title">Dr. <%= name%></h5>
+                  <p class="text-muted mb-0"><i class="fa-solid fa-stethoscope"></i> <%=@doctor.speciality.name%></p>
+                  <p class="text-muted mb-0"><i class="fa-solid fa-square-envelope"></i> <%=@doctor.email%></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-8 doc-availability">
+              <div class="card booking-schedule schedule-widget">
+                <div class="schedule-header">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <%= week_calendar(number_of_weeks: 4, events: @appointments) do |date, appointments| %>
+                        <div class="day">
+                          <%= date %>
+                        </div>
+                        <% appointments.each do |appointment|%>
+                          <div class="card-header">
+                            <div class="card-title">
+                              <%= appointment.title%>
+                            </div>
+                          </div>
+                        <%end%>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="modal fade " id="addAppointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <%= form_with(model: @appointment) do |form| %>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Speciality</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row g-3">
+
+            <div class="col-md-6">
+              <%= form.label :title, class: "form-label" %>
+              <%= form.text_field :title, class: "form-control" %>
+            </div>
+            <div class="col-md-6">
+              <%= form.label :description, class: "form-label" %>
+              <%= form.text_field :description, class: "form-control" %>
+              <%= form.hidden_field :doctor_id, value: @doctor.id %>
+            </div>
+
+            <div class="col-md-6">
+              <%= form.label :start_date, class: "form-label" %>
+              <%= form.datetime_field :start_time, class: "form-control" %>
+            </div>
+
+            <div class="col-md-6">
+              <%= form.label :end_date, class: "form-label" %>
+              <%= form.datetime_field :end_time, class: "form-control" %>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <%= form.submit  class: "btn btn-primary speciality-submit"%>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>

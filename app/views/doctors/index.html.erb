@@ -1,47 +1,44 @@
-<p class = "flash-message"><%= notice %></p>
-
-<div class="content container-fluid">
-  <div class="page-header">
-    <div class="row">
-
-      <div class="col-md-12 d-flex justify-content-end">
-          <div class="doc-badge me-3">Doctors <span class="ms-1"><%=@doctors.count%></span></div>
-          <%= link_to "Add", new_doctor_path, class: "btn btn-danger table-btn" %>
-      </div>
-    </div>
-  </div>
-
+<div class="page-content">
   <div class="row">
     <div class="col-sm-12">
       <div class="card">
         <div class="card-header">
           <div class="row">
-            <div class="col-md-8">
-              <h5 class="card-title">Doctors</h5>
+            <div class="col-md-8 d-flex justify-content-start">
+
+              <a class="btn btn-dark" href="<%= new_doctor_path %>" >
+                <i class="fa-solid fa-plus"></i> Add
+              </a>
             </div>
-            <div class="col-md-4">
-              <div class="SortBy">
-              </div>
+
+            <div class="col-md-4 d-flex justify-content-end">
+              <button type="button" class="btn btn-light list-view-btn">
+                <i class="fa-solid fa-list" style ="color: black; height: 22px"></i>
+              </button>
+              <button type="button" class="btn btn-light grid-view-btn">
+                <i class="fa-solid fa-border-all " style ="color: #black; height: 22px;"></i>
+              </button>
             </div>
           </div>
         </div>
-        <div class="card-body">
+        <!-- <hr> -->
+        <div class="card-body list-view">
           <table class="table table-borderless table-sm table-hover">
             <thead>
               <tr class="table-columns">
                 <th scope="col">SID</th>
                 <th scope="col" >Doctor</th>
+                <th scope="col" >Email</th>
                 <th scope="col" >Speciality</th>
                 <th scope="col" >Created At</th>
                 <th scope="col" >Updated At</th>
-                <th scope="col" >Ebable/Disable</th>
                 <th scope="col" class="tab-end">EDIT | Delete</th>
               </tr>
             </thead>
             <tbody>
               <% @doctors.each do |doctor| %>
                 <tr class = "table-rows">
-                  <th scope="row"><%= doctor.id%></th>
+                  <th scope="row">#<%= doctor.id%></th>
                   <td >
                     <div class="table-avatar">
                       <div class="spl-img">
@@ -54,6 +51,9 @@
                     </div>
                   </td>
                   <td>
+                    <%= doctor.email %>
+                  </td>
+                  <td>
                     <%= doctor.speciality.name %>
                   </td>
                   <td>
@@ -62,20 +62,45 @@
                   <td>
                     <%= parse_dates(doctor.updated_at) %>
                   </td>
-                  <td>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                      <label class="form-check-label" for="flexSwitchCheckChecked"></label>
-                    </div>
-                  </td>
                   <td class="tab-end">
-                    <%= link_to "Edit", edit_doctor_path(doctor), class: "btn btn-danger table-btn" %>
-                    <%= link_to "Delete", doctor, method: :delete, class: "btn btn-danger table-btn" %>
+                    <a class="text-black actions" href=" <%= edit_doctor_path(doctor) %>" >
+                      <i class="fa-solid fa-file-pen"></i> Edit
+                    </a>
+                    |
+                    <a class="text-danger actions"  data-turbo-method="delete" data-turbo-confirm="Are you sure?" href="<%= doctor_path(doctor)%>" >
+                      <i class="fa-solid fa-trash"></i> Delete
+                    </a>
                   </td>
                 </tr>
               <% end %>
             </tbody>
           </table>
+        </div>
+
+        <div class="card-body grid-view">
+          <div class="row">
+            <% @doctors.each do |doctor| %>
+
+              <div class="col-md-3" style= "margin-bottom: 20px">
+                <div class="card" style="width: fit-content;">
+                  <div class="" style="text-align: center">
+                    <%= image_tag(doctor.image, class: "card-image") %>
+
+                  </div>
+                  <hr style = "margin-top: 0px">
+                  <div class="card-body">
+                    <%name = doctor.first_name + " " + doctor.last_name%>
+
+                    <h5 class="card-title">Dr. <%= name%></h5>
+                    <p class="text-muted mb-0"><i class="fa-solid fa-stethoscope"></i> <%=doctor.speciality.name%></p>
+                    <p class="text-muted mb-0"><i class="fa-solid fa-square-envelope"></i> <%=doctor.email%></p>
+                  </div>
+                </div>
+              </div>
+            <%end%>
+          </div>
+
+
 
         </div>
       </div>
@@ -83,3 +108,15 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(".grid-view").hide()
+  $(".grid-view-btn").click(function() {
+    $(".list-view").hide()
+    $(".grid-view").show()
+  })
+  $(".list-view-btn").click(function() {
+    $(".grid-view").hide()
+    $(".list-view").show()
+  })
+</script>

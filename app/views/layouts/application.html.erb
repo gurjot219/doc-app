@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Docapp</title>
+    <title>
+      <%= breadcrumbs.map(&:name).reverse.append("Doc App").join(" | ") %>
+    </title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,9 +15,46 @@
 
   <body>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <div class="container">
-      <%= render "shared/header"%>
-      <%= yield %>
-    </div>
+
+    <%if is_log_in_page? %>
+      <div class="container-fluid" >
+        <div class="page-wrapper">
+          <div class="header">
+            <%= render "shared/header"%>
+          </div>
+
+          <div class="flash-messages">
+            <p class="notice"><%= notice %></p>
+          </div>
+
+          <div class="content">
+            <%= yield %>
+          </div>
+
+          <div class="footer">
+            <%= render "shared/footer"%>
+
+          </div>
+        </div>
+      </div>
+    <%else%>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="page-wrapper col-md-12">
+            <div class="header">
+              <%= render "shared/header"%>
+            </div>
+
+            <div class="flash-messages">
+              <p class="notice"><%= notice %></p>
+            </div>
+
+            <div class="content">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <%end%>
   </body>
 </html>

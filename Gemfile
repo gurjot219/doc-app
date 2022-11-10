@@ -29,6 +29,14 @@ gem "jbuilder"
 
 gem "figaro"
 
+gem 'devise'
+
+gem "font-awesome-rails"
+gem "font-awesome-sass", "~> 6.2.0"
+
+gem "simple_calendar", "~> 2.4"
+gem "pundit"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

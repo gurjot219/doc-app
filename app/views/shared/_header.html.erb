@@ -1,41 +1,101 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">DOC APP</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Doctors", new_doctor_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Patients</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Appointments</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Reports</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
-      </ul>
-      <div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+<header>
+    <div class="px-3 py-2 bg-dark text-white">
+      <div class="container-fluid">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+            <i class="fa-solid fa-hospital hospital-icon"></i>
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" data-bs-popper="static">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+
+          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+            <li>
+              <a href="#" class="nav-link text-white">
+                <i class="fa-solid fa-house bi d-block mx-auto mb-1 nav-icons"></i>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link text-white">
+                <i class="fa-solid fa-briefcase-medical bi d-block mx-auto mb-1 nav-icons"></i>
+                Specialities
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link text-white">
+                <i class="fa-solid fa-user-doctor bi d-block mx-auto mb-1 nav-icons"></i>
+                Doctors
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link text-white">
+                <i class="fa-solid fa-user bi d-block mx-auto mb-1 nav-icons"></i>
+                Patients
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link text-white">
+                <i class="fa-solid fa-calendar-plus bi d-block mx-auto mb-1 nav-icons"></i>
+                Appointments
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link text-white" >
+                <i class="fa-solid fa-id-card bi d-block mx-auto mb-1 nav-icons"></i>
+                Reports
+              </a>
+            </li>
           </ul>
+
+          <div class="dropdown " style="margin-left:45px">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://github.com/mdo.png" alt="mdo" width="38" height="38" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+              <li><a class="dropdown-item" href="#">New project...</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-  </div>
-</nav>
+
+
+    <div class="px-3 py-2 border-bottom mb-3">
+      <div class="container-fluid ">
+        <div class="row">
+
+          <div class="col-md-6 d-flex justify-content-start">
+            <div class="color-controls " style="margin-left: 20px">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <% breadcrumbs.each do |crumb| %>
+                    <%if breadcrumbs.last == crumb%>
+                    <li class="breadcrumb-item active" aria-current="page">
+                      <%= crumb.name %>
+                    </li>
+                    <%else%>
+                      <li class="breadcrumb-item">
+                        <%= link_to crumb.name, crumb.path, class: "breadcrumb-link" %>
+                      </li>
+                    <%end%>
+                  <%end%>
+                </ol>
+              </nav>
+            </div>
+          </div>
+
+          <div class="col-md-6 d-flex justify-content-end">
+            <div class="view-controls" style="margin-right: 20px">
+              <i class="fa-solid fa-sun" style ="color: #ffdf00; height: 26px;"></i>
+              <i class="fa-solid fa-star-and-crescent" style ="height: 26px; margin-left: 7px;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>

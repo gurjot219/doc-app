@@ -21,7 +21,7 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <%= form.submit  class: "btn btn-info"%>
+          <%= form.submit  class: "btn btn-primary speciality-submit"%>
         </div>
       </div>
     <%end%>
@@ -30,6 +30,7 @@
 
 <script type="text/javascript">
   $(".edit-button").click(function() {
+    $(".speciality-submit").val("Edit Speciality")
     name = $(this).attr("data-name")
     id   = $(this).attr("data-id")
 
