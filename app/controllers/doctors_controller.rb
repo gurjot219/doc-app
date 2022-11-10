@@ -10,6 +10,7 @@ class DoctorsController < ApplicationController
   def new
     @specialities = Speciality.all
     @doctor = Doctor.new
+    authorize @doctor
   end
 
   def create
@@ -30,6 +31,7 @@ class DoctorsController < ApplicationController
   end
 
   def edit
+    authorize @doctor
     @specialities = Speciality.all
   end
 
@@ -44,6 +46,7 @@ class DoctorsController < ApplicationController
   end
 
   def destroy
+    authorize @doctor
     @doctor.destroy
 
     respond_to do |format|
