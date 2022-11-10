@@ -11,7 +11,6 @@ class PatientsController < ApplicationController
   end
 
   def create
-    debugger
     @patient = Patient.new(patient_params)
     respond_to do |format|
       if @patient.save
@@ -23,7 +22,8 @@ class PatientsController < ApplicationController
   end
 
   def show
-
+    start_date = params.fetch(:start_date, Date.today).to_date
+    @appointments = Appointment.where(start_time: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
   end
 
   def edit
