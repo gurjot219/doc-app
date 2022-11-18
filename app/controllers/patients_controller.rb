@@ -1,4 +1,5 @@
 class PatientsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_patient, only: %i[ show edit update destroy ]
   before_action :set_breadcrumbs
 
@@ -19,7 +20,7 @@ class PatientsController < ApplicationController
       if @patient.save
         format.html { redirect_to patients_url, notice: "Patient was successfully Created." }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html {render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -27,7 +28,7 @@ class PatientsController < ApplicationController
   def show
     authorize @patient
     start_date = params.fetch(:start_date, Date.today).to_date
-    @appointments = Appointment.where(start_time: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
+    @appointments = @patient.appointments.where(start_time: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
   end
 
   def edit

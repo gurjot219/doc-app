@@ -1,4 +1,5 @@
 class DoctorsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_doctor, only: %i[ show edit update destroy ]
   before_action :set_breadcrumbs
 
@@ -15,6 +16,7 @@ class DoctorsController < ApplicationController
 
   def create
     @doctor = Doctor.new(doctor_params)
+    @specialities = Speciality.all
     respond_to do |format|
       if @doctor.save
         format.html { redirect_to doctors_url, notice: "Doctor was successfully Created." }
@@ -27,7 +29,7 @@ class DoctorsController < ApplicationController
   def show
     @appointment = Appointment.new
     start_date = params.fetch(:start_date, Date.today).to_date
-    @appointments = Appointment.where(start_time: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
+    @appointments = @doctor.appointments.where(start_time: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
   end
 
   def edit

@@ -15,22 +15,42 @@
 
                 <div class="col-md-6">
                   <%= form.label :first_name, class: "form-label" %>
-                  <%= form.text_field :first_name, class: "form-control" %>
+                  <%= form.text_field :first_name, class: "form-control #{'red-border' if get_errors(:first_name, @patient)[0]}"  %>
+                  <% if get_errors(:first_name, @patient)[0] %>
+                    <p class = "error_message">
+                      <i class="fa-solid fa-triangle-exclamation error_icon"></i><%=get_errors(:first_name, @patient)[1]%>
+                    </p>
+                  <%end%>
                 </div>
 
                 <div class="col-md-6">
                   <%= form.label :last_name, class: "form-label" %>
-                  <%= form.text_field :last_name, class: "form-control" %>
+                  <%= form.text_field :last_name, class: "form-control #{'red-border' if get_errors(:last_name, @patient)[0]}" %>
+                  <% if get_errors(:last_name, @patient)[0] %>
+                    <p class = "error_message">
+                      <i class="fa-solid fa-triangle-exclamation error_icon"></i><%=get_errors(:last_name, @patient)[1]%>
+                    </p>
+                  <%end%>
                 </div>
 
                 <div class="col-md-6">
-                  <%= form.label :email, class: "form-label" %>
+                  <%= form.label :email, class: "form-label #{'red-border' if get_errors(:email, @patient)[0]}" %>
                   <%= form.email_field :email, class: "form-control" %>
+                  <% if get_errors(:email, @patient)[0] %>
+                    <p class = "error_message">
+                      <i class="fa-solid fa-triangle-exclamation error_icon"></i><%=get_errors(:email, @patient)[1]%>
+                    </p>
+                  <%end%>
                 </div>
 
                 <div class="col-md-6">
-                  <%= form.label :password, class: "form-label" %>
+                  <%= form.label :password, class: "form-label #{'red-border' if get_errors(:password, @patient)[0]}" %>
                   <%= form.email_field :password, class: "form-control" %>
+                  <% if get_errors(:password, @patient)[0] %>
+                    <p class = "error_message">
+                      <i class="fa-solid fa-triangle-exclamation error_icon"></i><%=get_errors(:password, @patient)[1]%>
+                    </p>
+                  <%end%>
                 </div>
 
                 <div class="col-md-6">

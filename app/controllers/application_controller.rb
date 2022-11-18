@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized
     flash[:alert] = 'You are not authorized to perform this action.'
-    redirect_to root_path
+    redirect_to doctors_path
   end
 
   def configure_permitted_parameters
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-	   root_path
+	   doctors_path
   end
 
   def after_sign_out_path_for(resource)

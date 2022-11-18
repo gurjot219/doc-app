@@ -25,18 +25,12 @@
 .tab-end{
   text-align: end;
 }
-
 .page-header {
   padding-top: 5px;
   padding-bottom: 20px;
   position: relative;
   transition: all 0.4s ease;
 }
-.card-header{
-  // background: none;
-  // border-bottom: none;
-}
-
 .table-columns{
   background-color: #f8f9fa;
 }
@@ -46,7 +40,6 @@
 .doc-badge{
   padding-top: 7px
 }
-
 .flash-message {
   color: #707071;
   background: aliceblue;
@@ -55,19 +48,19 @@
 
 #doctor_speciality_id{
   border: none;
-  width: 638px;
+  width: 390px;
 }
-
 .page-content {
+  margin-top: 40px;
   padding-left: 2rem;
   padding-right: 2rem;
+  overflow-y: auto;
+  max-height: 450px;
 }
-
 
 .actions{
   text-decoration: none;
 }
-
 .nav-header{
   background-color: #f8f9fa;
   height: 69px;
@@ -80,7 +73,6 @@
     height: 84px;
     width: 84px;
 }
-
 .day-slot  {
     float: left;
     padding-left: 5px;
@@ -88,13 +80,11 @@
     text-align: center;
     width: 14.28%;
 }
-
 .hospital-icon {
     height: 60px;
     width: 60px;
     margin-left: 22px;
 }
-
 .nav-icons {
   height: 23px;
   width: 23px
@@ -118,4 +108,30 @@
   padding-bottom: 0px;
   padding-top: 0px;
   font-weight: 400;
+}
+.card-body{
+  margin-left: 24px;
+}
+.red-border{
+  border-color: red;
+}
+.error_message {
+  color: red
+}
+.error_icon {
+  margin-right: 6px;
+}
+.sign_in_btn{
+  background-color: cornsilk;
+  margin-left: 35px;
+}
+.sign_in_page{
+  margin-left: 100px;
+  margin-right: 100px;
+}
+.footer{
+  margin-top: 50px;
+}
+.display-controls{
+  --fa-animation-duration: 8s;
 }
