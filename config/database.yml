@@ -13,9 +13,9 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%=ENV["username"]%>
-  password: <%=ENV["password"]%>
-  socket: /tmp/mysql.sock
+  username: root
+  password: Walia@219
+  socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
@@ -50,6 +50,7 @@ test:
 #
 production:
   <<: *default
+  host: doc-app.mysql.database.azure.com
   database: docapp_production
-  username: docapp
-  password: <%= ENV["DOCAPP_DATABASE_PASSWORD"] %>
+  username: guru
+  password: Walia@219
