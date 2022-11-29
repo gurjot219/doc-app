@@ -13,7 +13,7 @@ class Doctor < ApplicationRecord
   after_create :create_users
 
   def create_users
-    User.create(first_name: first_name, last_name: last_name, email: email, password: password)
+    User.create(first_name: first_name, last_name: last_name, email: email, password: password, role: "doctor")
   end
 
 
