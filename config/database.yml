@@ -12,6 +12,7 @@
 default: &default
   adapter: mysql2
   encoding: utf8mb4
+  host: db
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%=ENV["username"]%>
   password: <%=ENV["password"]%>
@@ -50,6 +51,8 @@ test:
 #
 production:
   <<: *default
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: docapp_production
-  username: docapp
-  password: <%= ENV["DOCAPP_DATABASE_PASSWORD"] %>
+  host: <%=ENV["DATABASE_HOST"]%>
+  username: admin
+  password: capstone

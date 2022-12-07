@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  db:
+    platform: linux/x86_64
+    image: percona
+    ports:
+      - 3306:3306
+    volumes:
+      - ./tmp/db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: Walia@219
+
+  web:
+    build: .
+    tty: true
+    stdin_open: true
+    command: bundle exec rails s -b 0.0.0.0
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
