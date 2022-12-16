@@ -2,7 +2,8 @@ class AppointmentsController < ApplicationController
 
   def create
     @appointment = Appointment.new(appointment_params)
-    @appointment.patient_id = 3
+    patient = Patient.find_by_email(current_user.email)
+    @appointment.patient_id = patient.id
     if @appointment.save
       redirect_to doctors_path
     end
